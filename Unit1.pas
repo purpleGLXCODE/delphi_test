@@ -118,8 +118,15 @@ begin
     Exit;
   end;
 
-  if not TryStrToInt(Trim(EditNDS.Text), NDSValue) or
-    (NDSValue < 0) or (NDSValue > 99) then
+  if not TryStrToInt(Trim(EditNDS.Text), NDSValue) then
+  begin
+    MessageDlg('Ставка НДС должна быть целым числом от 0 до 99.',
+      mtError, [mbOK], 0);
+    EditNDS.SetFocus;
+    Exit;
+  end;
+
+  if (NDSValue < 0) or (NDSValue > 99) then
   begin
     MessageDlg('Ставка НДС должна быть целым числом от 0 до 99.',
       mtError, [mbOK], 0);
